@@ -7,6 +7,11 @@ on:
 
 jobs:
   update:
+    # The reusable workflow commits, pushes a tag, and creates a release, so the
+    # GITHUB_TOKEN needs write access. The repo default is read-only and a called
+    # workflow cannot elevate above the caller, so it must be granted here.
+    permissions:
+      contents: write
     uses: spaceplay-games/unity-firebase-upm/.github/workflows/update-package.yml@main
     with:
       package_name: "com.google.external-dependency-manager"
